@@ -26,7 +26,7 @@ app.use(
     secret: process.env.SECRET,
     algorithms: ["HS256"],
     getToken: req => req.cookies.token
-  }).unless({ path: ["/sobre", "/autenticar", "/logar", "/deslogar", "/cadastrar", "/cadastra"] })
+  }).unless({ path: ["/sobre", "/autenticar", "/logar", "/deslogar"] })
 );
 
 app.get('/autenticar', async function (req, res) {
