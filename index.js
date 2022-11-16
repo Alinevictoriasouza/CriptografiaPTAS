@@ -26,7 +26,7 @@ app.use(
     secret: process.env.SECRET,
     algorithms: ["HS256"],
     getToken: req => req.cookies.token
-  }).unless({ path: ["/sobre", "/autenticar", "/logar", "/deslogar"] })
+  }).unless({ path: ["/cadastrar", "/cadastra", "/sobre", "/autenticar", "/logar", "/deslogar"] })
 );
 
 app.get('/autenticar', async function (req, res) {
@@ -60,7 +60,9 @@ app.post('/cadastra', async function (req, res) {
 
 app.post('/logar', async (req, res) => {
   const {senha} = req.body
+  console.log(await usuario.findAll())
   const usuarios = await usuario.findOne({ where: { usuario: req.body.usuario } })
+  console.log(usuarios)
   const senhaDecrypt = decrypt(usuarios.senha);
   if (req.body.usuario === usuarios.usuario && senha === senhaDecrypt) {
     const id = 1;
